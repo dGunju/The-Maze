@@ -1,11 +1,13 @@
 #ifndef HEADER_H
 #define HEADER_H
 
+/* standard library */
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <math.h>
 #include <limits.h>
 #include <stdio.h>
+#include <float.h>
 #include <stdbool.h>
 #include "upng.h"
 
@@ -14,65 +16,45 @@
 
 #define PI 3.14159265
 #define TWO_PI 6.28318530
-
 #define TILE_SIZE 64
-
-#define MINIMAP_SCALE_FACTOR 0.25
-
+#define MINIMAP_SCALE_FACTOR 0.45
 #define SCREEN_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 #define SCREEN_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
-
 #define FOV_ANGLE (60 * (PI / 180))
-
-#define NUM_RAYS SCREEN_WIDTH
-
 #define PROJ_PLANE ((SCREEN_WIDTH / 2) / tan(FOV_ANGLE / 2))
-
+#define NUM_RAYS SCREEN_WIDTH
 #define FPS 30
 #define FRAME_TIME_LENGTH (1000 / FPS)
-
 #define MAP_NUM_ROWS 13
 #define MAP_NUM_COLS 20
-
 #define NUM_TEXTURES 8
-
 typedef uint32_t color_t;
 
-/* Process Input */
-void handleInput(void);
+/* variables */
 extern bool GameRunning;
 
-/* Functions-variables-structs for draw */
+/* Functions for Input */
+void SDL_KEYDOWN_FUNC(SDL_Event event);
+void SDL_KEYUP_FUNC(SDL_Event event);
+void handleInput(void);
+
+/* Functions for draw */
 
 bool initializeWindow(void);
-void destroyWindow(void);
-void clearColorBuffer(color_t color);
-void render_game(void);
 void renderColorBuffer(void);
+void destroyWindow(void);
 void drawPixel(int x, int y, color_t color);
+void clearColorBuffer(color_t color);
 void drawRect(int x, int y, int width, int height, color_t color);
 void drawLine(int x0, int y0, int x1, int y1, color_t color);
 
-/* Functions-variables-structs for map */
+/* Functions for map */
 bool DetectCollision(float x, float y);
 bool isInsideMap(float x, float y);
 void renderMap(void);
 int getMapValue(int row, int col);
 
-/* Functions-variables-structs for player */
-
-/**
- * struct player_s - struct for the textures
- * @x: x coordinate
- * @y: y coordinate
- * @width: player width
- * @height: player height
- * @turnDirection: Turn Direction
- * @walkDirection: Walk Direction
- * @rotationAngle: player rotation angle
- * @walkSpeed: walk speed
- * @turnSpeed: turn speed
- */
+/* structs for player */
 
 typedef struct player_s
 {
@@ -87,23 +69,14 @@ typedef struct player_s
 	float turnSpeed;
 } player_t;
 
+/* struct variable player */
 extern player_t player;
 
+/* function for player file */
 void movePlayer(float DeltaTime);
 void renderPlayer(void);
 
-/* Functions-variables-structs for ray */
-
-/**
- * struct ray_s - struct for the textures
- * @rayAngle: ray angle
- * @wallHitX: wall hit x coordinate
- * @wallHitY: wall hit x coordinate
- * @distance: ditance to the wall
- * @wasHitVertical: verify hit vertical
- * @wallHitContent: wall hit content
- */
-
+/* structs for ray */
 typedef struct ray_s
 {
 	float rayAngle;
@@ -114,20 +87,24 @@ typedef struct ray_s
 	int wallHitContent;
 } ray_t;
 
+/* struct variable rays */
 extern ray_t rays[NUM_RAYS];
 
-float distanceBetweenPoints(float x1, float y1, float x2, float y2);
-bool isRayFacingUp(float angle);
-bool isRayFacingDown(float angle);
-bool isRayFacingLeft(float angle);
-bool isRayFacingRight(float angle);
+/* function for rays file */
 void castAllRays(void);
 void castRay(float rayAngle, int stripId);
 void renderRays(void);
 void horzIntersection(float rayAngle);
 void vertIntersection(float rayAngle);
 
-/* Functions-variables-structs for textures */
+/* function for ray_direction file */
+float distanceBetweenPoints(float x1, float y1, float x2, float y2);
+bool isRayFacingUp(float angle);
+bool isRayFacingDown(float angle);
+bool isRayFacingLeft(float angle);
+bool isRayFacingRight(float angle);
+
+/* Functions variables-structs for textures */
 
 /**
  * struct texture_s - struct for the textures
@@ -152,7 +129,10 @@ void WallTexturesready(void);
 void freeWallTextures(void);
 
 /* Functions-variables-structs for walls */
-
+void renderCeil(int wallTopPixel, color_t* texelColor, int x);
+void renderFloor(int wallBottomPixel, color_t* texelColor, int x);
+void changeColorIntensity(color_t* color, float factor);
 void renderWall(void);
 
-#endif /*HEADER_H*/
+#endif
+
