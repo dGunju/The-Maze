@@ -90,12 +90,12 @@ typedef struct ray_s
 /* struct variable rays */
 extern ray_t rays[NUM_RAYS];
 
-/* function for rays file */
+/* function for ray file */
 void castAllRays(void);
 void castRay(float rayAngle, int stripId);
 void renderRays(void);
-void horzIntersection(float rayAngle);
-void vertIntersection(float rayAngle);
+void horizontalIntersection(float rayAngle);
+void verticalIntersection(float rayAngle);
 
 /* function for ray_direction file */
 float distanceBetweenPoints(float x1, float y1, float x2, float y2);
@@ -135,4 +135,3 @@ void changeColorIntensity(color_t* color, float factor);
 void renderWall(void);
 
 #endif
-

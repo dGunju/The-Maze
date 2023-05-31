@@ -19,7 +19,6 @@ static const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 
 /**
  * DetectCollision - Checks if there could be a collision
- * with the wall in the next player advance
  * @x: next x coordinate
  * @y: next y coordinate
  * Return: true if collision is detected, false otherwise
@@ -30,7 +29,7 @@ bool DetectCollision(float x, float y)
 	int mapGridX, mapGridY;
 
 	if (x < 0 || x >= MAP_NUM_COLS * TILE_SIZE ||
-			y < 0 || y >= MAP_NUM_ROWS * TILE_SIZE)
+		y < 0 || y >= MAP_NUM_ROWS * TILE_SIZE)
 		return (true);
 
 	mapGridX = floor(x / TILE_SIZE);
@@ -48,7 +47,7 @@ bool DetectCollision(float x, float y)
 bool isInsideMap(float x, float y)
 {
 	return (x >= 0 && x <= MAP_NUM_COLS * TILE_SIZE &&
-				y >= 0 && y <= MAP_NUM_ROWS * TILE_SIZE);
+		y >= 0 && y <= MAP_NUM_ROWS * TILE_SIZE);
 }
 
 /**
@@ -83,7 +82,7 @@ void renderMap(void)
 			tileY = i * TILE_SIZE;
 			tileColor = map[i][j] != 0 ? 0xFFFFFFFF : 0x00000000;
 
-			drawRect(
+			drawRectangle(
 				tileX * MINIMAP_SCALE_FACTOR,
 				tileY * MINIMAP_SCALE_FACTOR,
 				TILE_SIZE * MINIMAP_SCALE_FACTOR,
