@@ -22,7 +22,7 @@ bool initializeWindow(void)
 	SDL_GetCurrentDisplayMode(0, &display_mode);
 	fullScreenWidth = display_mode.w;
 	fullScreenHeight = display_mode.h;
-	window = SDL_CreateWindow(
+	wndow = SDL_CreateWindow(
 		NULL,
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
@@ -100,6 +100,6 @@ void destroyWindow(void)
 	free(colorBuffer);
 	SDL_DestroyTexture(colorBufferTexture);
 	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
+	SDL_DestroyWindow(wndow);
 	SDL_Quit();
 }

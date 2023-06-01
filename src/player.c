@@ -29,7 +29,7 @@ void movePlayer(float DeltaTime)
 
 void renderPlayer(void)
 {
-	drawRectangle(
+	drawRect(
 		player.x * MINIMAP_SCALE_FACTOR,
 		player.y * MINIMAP_SCALE_FACTOR,
 		player.width * MINIMAP_SCALE_FACTOR,
