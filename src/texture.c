@@ -3,6 +3,10 @@
 static const char *textureFileNames[NUM_TEXTURES] = {
 	"./images/bush.png",
 	"./images/bluestone.png",
+	"./images/purplestone.png",
+	"./images/mossystone.png",
+	"./images/graystone.png",
+	"./images/colorstone.png",
 	"./images/wood.png",
 	"./images/redbrick.png",
 };
