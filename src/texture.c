@@ -1,11 +1,7 @@
 #include "../headers/header.h"
 
 static const char *textureFileNames[NUM_TEXTURES] = {
-	"./images/purplestone.png",
-	"./images/graystone.png",
-	"./images/mossystone.png",
-	"./images/eagle.png",
-	"./images/colorstone.png",
+	"./images/bush.png",
 	"./images/bluestone.png",
 	"./images/wood.png",
 	"./images/redbrick.png",
